@@ -25,6 +25,8 @@ feature "User checks a recipe's deliciousness", %(
     fill_in 'recipe_name', with: 'pickled beets'
     click_button 'Submit'
     expect(page).to have_content("is a delicious recipe!")
+    expect(page).to have_content("The High-Tech Recipe Evaluation Machin")
+    expect(page).to have_content("Try again!")
   end
 
   scenario "user submits a recipe name without 'pickled beets'" do
@@ -32,14 +34,14 @@ feature "User checks a recipe's deliciousness", %(
     fill_in 'recipe_name', with: 'sunflower seeds'
     click_button 'Submit'
     expect(page).to have_content("is not a delicious recipe!")
-
+    expect(page).to have_content("Try again!")
   end
 
   scenario "user navigates back to the home page after checking a recipe name" do
     visit '/'
-    fill_in 'recipe_name', with: 'pickled beets'
+    fill_in 'recipe_name', with: 'sunflower seeds'
     click_button 'Submit'
-    visit '/'
+    click_link 'Try again!'
   end
 
   scenario "user submits an empty form" do
@@ -53,7 +55,6 @@ feature "User checks a recipe's deliciousness", %(
     visit '/'
     fill_in 'recipe_name', with: ''
     click_button 'Submit'
-    visit '/'
-
+    click_link 'Try again!'
   end
 end

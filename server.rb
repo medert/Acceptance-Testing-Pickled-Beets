@@ -14,12 +14,12 @@ post '/' do
   if params[:recipe_name].empty?
     erb :error
   else
-    @is_delicious = is_delicious?(params[:recipe_name])
+    @delicious = delicious?(params[:recipe_name])
     @recipe_name = params[:recipe_name]
     erb :results
   end
 end
 
-def is_delicious?(recipe_name)
+def delicious?(recipe_name)
   recipe_name.downcase.include?("pickled beets")
 end
